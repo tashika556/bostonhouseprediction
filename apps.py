@@ -100,3 +100,23 @@ for i,col in enumerate(['RM','LSTAT','PTRATIO']):
             help=FEATURE_DESCRIPTION[col],
             step=0.1
         )
+
+if st.button("Predict Price",type="primary"):
+    input_df=pd.DataFrame([input_values])   
+    input_scaled = scaler.transform(input_df)
+
+    prediction = model.predict(input_scaled)[0]
+    lower_bound = prediction * 0.95
+    upper_bound = prediction * 1.05
+
+    st.success(f"""
+             --Predicted Home Value: --
+                 ${prediction*1000:,.0f}
+            (Estimated range: ${lower_bound*1000:,.0f} - ${upper_bound*1000:,.0f})
+               """)
+    st.spinner()
+
+st.markdown("---")
+st.caption("Note: Prediction are based on historical Boston housing data. Actual price may vary ")
+
+
