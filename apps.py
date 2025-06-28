@@ -11,7 +11,7 @@ import numpy as np
 FRIENDLY_NAMES = {
     "RM" : "Average Rooms",
     "LSTAT" : "Poverty Rate (%)",
-    "PTRATIO" : "School Quality (Student:Teacher Ratio)"
+    "PTRATIO" : "School Quality (Student : Teacher Ratio)"
 }
 
 FEATURE_DESCRIPTION= {
@@ -84,4 +84,19 @@ plt.xlabel(FRIENDLY_NAMES.get(feature,feature))
 plt.ylabel("Price ($1000s)")
 st.pyplot(fig)
 
-st.subheader("Predict the Price based on the features given below. Adjust accordingly and predict")
+st.subheader("Predict the Price based on the features given below.")
+st.markdown(" Adjust accordingly and predict")
+
+cols = st.columns(3)
+input_values={}
+
+for i,col in enumerate(['RM','LSTAT','PTRATIO']):
+    with cols[i]:
+        input_values[col]= st.slider(
+            FRIENDLY_NAMES[col],
+            min_value=float(X[col].min()),
+            max_value=float(X[col].max()),
+            value=float(X[col].median()),
+            help=FEATURE_DESCRIPTION[col],
+            step=0.1
+        )
