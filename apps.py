@@ -65,6 +65,7 @@ with st.sidebar:
     st.header("Explore Features")
     feature = st.selectbox("Select Feature ", options = X.columns, format_func = lambda x : FRIENDLY_NAMES.get(x,x))
 
+
 st.header("Data Exploration")
 col1 , col2 = st.columns(2)
 
@@ -114,9 +115,9 @@ if st.button("Predict Price",type="primary"):
                  ${prediction*1000:,.0f}
             (Estimated range: ${lower_bound*1000:,.0f} - ${upper_bound*1000:,.0f})
                """)
-    st.spinner()
+    st.balloons()
 
 st.markdown("---")
 st.caption("Note: Prediction are based on historical Boston housing data. Actual price may vary ")
-
+st.caption("Developed by Tashika Singh")
 
